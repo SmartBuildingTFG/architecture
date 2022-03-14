@@ -1,0 +1,22 @@
+-- 11/03/2022 (2 horas)
+Empezamos leyendo:
+ - ISO/IEC/IEEE 12207:2017 (Procesos del ciclo de vida del software)
+ - ISO/IEC/IEEE 29148:2018 (Ingenieria de Requisitos)
+
+Que explica los pasos para definir un Documento de Requisitos (SRS)
+
+Hay 4 procesos principales, que involucran a las partes interesadas, 
+varios tipos de analisis, y otro asuntos que no son relevantes para este proyecto, 
+por lo que el centro de atencion va a estar en los procesos tecnicos, que se enfocan 
+[en definir los requisitos para un software, en transformar los requisitos en un 
+producto eficaz, en permitir la reproduccion coherente del producto cuando sea necesario,
+ ...] p55  entre otros.
+
+Primero pasaremos por el Proceso de Analisis del Negocio.
+Cuyo objetivo es el de [definir el problema/oportunidad del negocio, caracterizar 
+el espacio de soluciones y determinar tipos de soluciones en potencia que podrian 
+resolver el problema o aprovechar la ventaja de la oportunidad detectada] p56.
+
+-- 14/03/2022 (1 hora)
+Seguimos rellenando el SRS. 
+(Más bien le dedicamos el tiempo a buscar refs y cosas para citar)
