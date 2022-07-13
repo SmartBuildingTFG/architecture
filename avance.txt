@@ -20,3 +20,9 @@ resolver el problema o aprovechar la ventaja de la oportunidad detectada] p56.
 -- 14/03/2022 (1 hora)
 Seguimos rellenando el SRS. 
 (Más bien le dedicamos el tiempo a buscar refs y cosas para citar)
+
+-- 16/03/2022 (16:09)
+Seguimos rellenando el SRS.
+
+-- 15/06/2022 (18:59)
+Repaso de todo lo escrito hasta la fecha.
