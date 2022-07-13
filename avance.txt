@@ -25,4 +25,8 @@ Seguimos rellenando el SRS.
 Seguimos rellenando el SRS.
 
 -- 15/06/2022 (18:59)
-Repaso de todo lo escrito hasta la fecha.
+Repaso de todo lo escrito hasta la fecha. Y desarrollamos un poco más
+
+-- 13/07/2022 (18:30)
+ Repaso de lo escrito y desarrollamos un poco más.
+ Continuamos desarrollando el SRS siguiendo el esquema de la p67.
