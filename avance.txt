@@ -21,15 +21,8 @@ resolver el problema o aprovechar la ventaja de la oportunidad detectada] p56.
 Seguimos rellenando el SRS. 
 (Más bien le dedicamos el tiempo a buscar refs y cosas para citar)
 
-<<<<<<< HEAD
 -- 09/05/2022 (1 hora)
 Modificamos textos de introducción
-
--- 12/10/2022
-p67: ISO/IEC/IEEE 29148:2018 (Estructura del SRS)
-=======
--- 16/03/2022 (16:09)
-Seguimos rellenando el SRS.
 
 -- 15/06/2022 (18:59)
 Repaso de todo lo escrito hasta la fecha. Y desarrollamos un poco más
@@ -37,4 +30,8 @@ Repaso de todo lo escrito hasta la fecha. Y desarrollamos un poco más
 -- 13/07/2022 (18:30)
  Repaso de lo escrito y desarrollamos un poco más.
  Continuamos desarrollando el SRS siguiendo el esquema de la p67.
->>>>>>> 823b792c276cdbedc39660d37f73084e2a4943b7
+
+-- 12/10/2022
+p67: ISO/IEC/IEEE 29148:2018 (Estructura del SRS)
+-- 16/03/2022 (16:09)
+Seguimos rellenando el SRS.
