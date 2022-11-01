@@ -14,27 +14,33 @@
 %% Sections
 \section{Introducción}
 \subsection{Propósito}
-Ahora:
-Desarrollar una plataforma virtual que permita interconectar cualquier elemento 
-integrable a la red de Internet que se encuentre en un edificio (Smart Buildinig).
-
-
-Antes:
-Uno de los objetivos de este sistema será el de ofrecer una plataforma común que
-permita interconectar dispositivos de la Smart City usando interfaces que ya son estándar.
+El desarrollo de una plataforma virtual común que permita interconectar cualquier elemento 
+integrable a la red de Internet (dispositivos IoT) que se encuentren en un edificio (Smart Building)
+usando interfaces de comunicación que ya son estándar.
 
 \subsection{Ámbito}
 Debido a las características del software que hacen uso de las tecnologías 
-\"Internet de las Cosas\" (IoT) para la gestión de dispositivos conectados a
+``Internet de las Cosas'' (IoT) para la gestión de dispositivos conectados a
 la red de un Edificio Inteligente (Smart Building), se ha decidido darle el nombre de
-\"IoTBuildingManagement\".
+``IBuilding''.
 
-IoTBuildingManagement será el módulo principal al que se podrán conectar diversos pluggins para la
-gestión de dispositivos IoT concretos dentro de un edificio. Cada pluggin deberá de tener 
-la lógica para controlar los datos de un dispositivo específico.
+IBuilding dispondrá de un servidor central (DataBuilding) que, usando la tecnología
+de Fiware, almacenará los datos propios de cada edificio (como la ubicación o el 
+tipo de servicio que ofrecen) y los dispositivos disponibles en el mismo. 
+Se podrán consultar los datos a través de una API que usará modelos estándares 
+de datos.
 
-IoTBuildingManagement deberá tener la lógica necesaria para que los dispositivos IoT
-puedan coordinarse entre sí.
+Por otro lado, para que los diferentes dispositivos se puedan integrar en el sistema,
+habrá una serie de microservicios que actuarán de puente entre cada dispositivo
+y el DataBuilding. (Adapters)
+
+También habrá una serie de microservicios que realizarán labores de análisis
+de datos y de orquestación, es decir, que controlarán de manera automática 
+los dipositivos.
+
+El desarrollo de una interfaz de usuario puede ser útil para la gestión de la plataforma
+a nivel usuario. Es por eso que también habrá un frontal para hacer uso de IBuilding
+que se conectará al DataBuilding y podrá visualizar/modificar los datos oportunos.
 
  Describe the scope of the software under consideration by:
  a) identifying the software product(s) to be produced by name (e.g., Host DBMS, Report Generator, etc.);
@@ -409,7 +415,8 @@ designated for the software product. If, in fact, the operating system is not av
 have to change accordingly.
 \subsection{Acrónimos y Abreviaturas}
 \begin{itemize}
-    \item \textbf{IoT}\ttab Internet de las Cosas
+    \item \textbf{IoT}\ttab Internet de las Cosas.
+    \item \textbf{API}\ttab Application Program Interface.
   \end{itemize}
 
 
