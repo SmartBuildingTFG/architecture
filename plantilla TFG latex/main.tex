@@ -3,6 +3,8 @@
 %% Preamble
 \usepackage{umatfgspanish}
 \usepackage{blindtext}
+\usepackage{listings}
+\usepackage{subfig}
 \graphicspath{ {./images/} }
 
 \begin{document}
@@ -65,13 +67,36 @@ Ayman Elnashar; Mohamed A. El-saidny, "IoT Evolution Towards a Super‐connected
 invertidos y el nº de dispositivos conectados han aumentado exponencialmente,
 )
 
-También destacable mencionar que la situación global de la COVID-19 ha incentivado
+También es destacable mencionar que la situación global de la COVID-19 ha incentivado
 y acelerado la aplicación de la IoT en diversos aspectos como la salud pública,
 la seguridad o la privacidad.
 
-    
 \subsection{Objetivos}
-El objetivo será desarrollar un sistema que, usando IoT, genere un digital twin de un Edificio
+Teniendo en cuenta las motivaciones principales:
+\begin{itemize}
+  \item La evolución de las ciudades
+  \item Aplicación de IoT
+\end{itemize}
+
+Se busca desarrollar un sofware que, utilizando las tecnologías de IoT, aporte en el desarrollo 
+tecnológico de las ciudades. 
+
+Teniendo en cuenta que uno de los pilares fundamentales de las ciudades son los edificios que la componen, 
+trabajar en un software para su gestión, puede ser una buena aproximación para lograr este objetivo.
+
+Por lo tanto, se va a buscar desarrollar un sistema que, usando IoT, permita gestionar los edificios
+de una ciudad. Las funciones principales que se le van a pedir a este software van a ser las siguientes:
+\begin{itemize}
+  \item Poder listar y filtrar los edificios que hay en una ciudad para tener información sobre ellos
+        de una forma organizada.
+  \item Conocer y gestionar la información de cada edificio indivialmente.
+  \item Capacitar a los edificios de dispositivos IoT para mejorar la información que se puede ofrecer
+        de estos y añadir interacciones para que realicen tareas como abrir la puerta o traer al 
+        ascensor.
+\end{itemize}
+entre otros que se desarrollarán con más detalle en un documento de requisitos.
+
+
 \subsection{Estructura del documento}
 
 \section{Estudio del arte}
@@ -133,15 +158,6 @@ de que ha ocurrido muy rápido, y todavía hay muchos puntos en los que debe de 
 Por lo que a la hora de hacer un desarrollo usando IoT se deben de tener en cuenta estos aspectos.
 
 
-Según el punto de vista de Fiware, las ciudades tienen 5 etapas en su camino a la digitalización inteligente:
-- Explotación vertical de Datos.
-- Estandarización de modelos y APIs para la interoperabilidad de cualquier sistema.
-- Datos abiertos (en tiempo real) para que terceros utilicen esos datos.
-- Exportación del Sector privado de Datos. (Fiware incentiva con MarketPlace)
--
-
-
-
 \subsection{Plataforma FIWARE} 
 Para el desarrollo de la plataforma, se ha decidido utilizar FIWARE.
 Esta plataforma consiste en un ecosistema de componentes software basados en arquitectura
@@ -166,6 +182,14 @@ cual hace más potente al sistema todavía.
   \caption{Niveles de integración posibles siguiendo una aproximación con Gemelo Digital}
 \end{figure}
 
+Según el punto de vista de Fiware, las ciudades tienen 5 etapas en su camino a la digitalización inteligente:
+\begin{itemize}
+  \item Explotación vertical de Datos.
+  \item Estandarización de modelos y APIs para la interoperabilidad de cualquier sistema.
+  \item Datos abiertos (en tiempo real) para que terceros utilicen esos datos.
+  \item Exportación del Sector privado de Datos. (Fiware incentiva con MarketPlace)
+\end{itemize}
+
 El elemento clave de integracion del ecosistema es el API NGSI 
 (La última versión, NGSI-LD, que aprovecha el Linked Data para la 
 interoperabilidad semántica). Entidades importantes como
@@ -175,18 +199,93 @@ Smart City de India, apoyan y recomiedan el uso de esta interfaz como estándar.
 Para que una plataforma se pueda calificar como "Basado en Fiware" debe de hacer uso
 del Context Broker de Fiware que será el encargado de gestionar y facilitar los datos
 de la plataforma. Alrededor de este Context Broker se encontrarán componentes que 
-facilitarán 
+soportarán y facilitarán la captura, procesamiento, seguridad, etc. de los datos.
+
+(Video conferencia de Canarias FIWARE)
+
+\subsubsection{NGSI-LD}
+NGSI-LD es una extension de JSON-LD. Eso significa que todos los NGSI-LD son JSON-LD,
+pero no viceversa.
+
+Como sabemos, JSON es un formato estándar de intercambio de datos, sin embargo, para
+una máquina (incluso entre personas) puede ser dificil de interpretar el significado
+de un dato que viene desde un JSON. Por ejemplo, un JSON con un campo name,
+\begin{lstlisting}
+  {"name": "alan turing"}
+\end{lstlisting}
+a priori no se sabe si name se trata del nombre de usuario de una plataforma o el 
+nombre real de esa persona. Es por eso por lo que, aprovechando el concepto de
+Linked Data, se desarrolló JSON-LD que se trata de una 
+extensión de JSON incluyendo anotaciones sobre los datos (metainformación):
+\begin{lstlisting}
+{
+  "@id": "https://uma.es/resources/informatica/tfg/2022/Alan_Turing",
+  "@context": "https://json-ld.org/contexts/person.jsonld",
+  "name": "alan turing"
+}
+\end{lstlisting}
+Gracias al Linked Data, se definen los tipos de datos de forma estandar y tanto una 
+persona como una máquina pueden tener un mejor entendimiento de qué significa cada dato
+que viene en un JSON.
+
+Los metadatos de JSON-LD vienen precedidos de un @, como en el ejemplo anterior:
+@context es una URI que nos lleva a un diccionario que ayuda a interpretar los campos
+del JSON asociando nombres a URIs donde se le otorga una definición
+de manera estandar y @id es un URI del dato.
+
+Con todo esto, podemos definir NGSI-LD, que no es más que la evolución de la versión
+NGSI-V2, pero soportando el Linked Data. Sabiendo que NGSI-V2 es JSON, solo hacía
+falta pasar a JSON-LD para implementar esa característica.
+
+Para ello, se ha definido un @context por defecto denominado core NGSI-LD context
+que se puede consultar desde la web de la etsi: https://uri.etsi.org/ngsi-ld/.
+(No es necesario incluirlo en el @context)
+
+Una de las cosas que hace es crear alias con los esquemas que más van a referenciar:
+\begin{lstlisting}
+"ngsi-ld": "https://uri.etsi.org/ngsi-ld/Date",
+"geojson": "https://purl.org/geojson/vocab#"
+\end{lstlisting}
+
+También crean alias para los campos id y type, que ya se usaban en NSGI-V2,
+dándole el significado que tienen @id y @type respectivamente en JSON-LD.
+
+"id": "@id",
+"type": "@type",
+
+Otra diferencia fundamental es cómo se define el modelo de datos.
+\begin{figure}[h]
+  \centering
+  \subfloat[NGSI-V2] {
+    \includegraphics[width=0.3\textwidth]{ngsi-v2-model.png}
+  }
+  \subfloat[NGSI-LD] {
+    \includegraphics[width=0.4\textwidth]{ngsi-ld-model.png}
+  }
+  \caption{Modelo de datos NGSI}
+\end{figure}
+
+https://www.youtube.com/watch?v=rZ13IyLpAtA (Video Fiware Introducción NsGSI-LD)
+https://fiware-datamodels.readthedocs.io/en/stable/ngsi-ld\_howto/index.html 
+ (Documentación de Fiware sobre NGSI-LD)
 
 \subsection{Ontología SAREF}
-Se trata de una interfaz de datos que le gusta la UE.
+Se trata de una interfaz de datos que le gusta a la UE.
 
 Gracias a ngsi-ld, podemos hace uso del modelo de datos.
 
 \section{Metodología de trabajo}
 Metodología de trabajo empleada en el TFG (esta parte también puede incluirse como una sección del capítulo de Introducción o como un capítulo independiente).
+El proyecto va a seguir una metodología agile de tipo Scrum.
 
-\section{Fases del proyecto (se procede)}
+
+\section{Fases del proyecto}
 Capítulos donde se estructure las fases del desarrollo, así como pruebas y resultados (si procede). 
+
+En una primera fase se va a desarrollar un documento de requisitos donde aparecerán todos los detalles del producto.
+
+En una segunda fase se van a desarrollar las tareas necesarias para el desarrollo del sistema y se van
+a planificar en interaciones de sprint. 
 
 \section{Conclusións e liñas de traballo futuras}
 Conclusiones y Líneas Futuras. En caso de redactarse la memoria en inglés, las conclusiones y líneas futuras deben redactarse también en castellano.
