@@ -14,9 +14,14 @@
 %% Sections
 \section{Introducción}
 \subsection{Propósito}
-El desarrollo de una plataforma virtual común que permita interconectar cualquier elemento 
-integrable a la red de Internet (dispositivos IoT) que se encuentren en un edificio (Smart Building)
-usando interfaces de comunicación que ya son estándar.
+Desarrollar una plataforma virtual común que permita:
+\begin{itemize}
+  \item Gestionar y organizar la información de cualquier edificio 
+        dentro de una ciudad.
+  \item Interconectar cualquier elemento integrable a la red de Internet 
+        (dispositivos IoT) que se encuentren en un edificio (Smart Building)
+        usando interfaces de comunicación que ya son estándar.
+\end{itemize}
 
 \subsection{Ámbito}
 Debido a las características del software que hacen uso de las tecnologías 
@@ -24,7 +29,7 @@ Debido a las características del software que hacen uso de las tecnologías
 la red de un Edificio Inteligente (Smart Building), se ha decidido darle el nombre de
 ``IBuilding''.
 
-IBuilding dispondrá de un servidor central (DataBuilding) que, usando la tecnología
+IBuilding dispondrá de un servidor central (llamado DataBuilding) que, usando la tecnología
 de Fiware, almacenará los datos propios de cada edificio (como la ubicación o el 
 tipo de servicio que ofrecen) y los dispositivos disponibles en el mismo. 
 Se podrán consultar los datos a través de una API que usará modelos estándares 
@@ -32,106 +37,24 @@ de datos.
 
 Por otro lado, para que los diferentes dispositivos se puedan integrar en el sistema,
 habrá una serie de microservicios que actuarán de puente entre cada dispositivo
-y el DataBuilding. (Adapters)
+y el DataBuilding. (Los denominaremos Adapters, i.e. ElevatorAdapter para un ascensor)
 
 También habrá una serie de microservicios que realizarán labores de análisis
 de datos y de orquestación, es decir, que controlarán de manera automática 
-los dipositivos.
+los dipositivos. (Los llamados Processors, como ANNPlateProcessor)
 
 El desarrollo de una interfaz de usuario puede ser útil para la gestión de la plataforma
 a nivel usuario. Es por eso que también habrá un frontal para hacer uso de IBuilding
 que se conectará al DataBuilding y podrá visualizar/modificar los datos oportunos.
+Para referirnos a este frontal usaremos el nombre de FrontalBuilding.
 
- Describe the scope of the software under consideration by:
- a) identifying the software product(s) to be produced by name (e.g., Host DBMS, Report Generator, etc.);
- b) explaining what the software product(s) will do;
- c) describing the application of the software being specified, including relevant benefits, objectives
- and goals; and
- d) being consistent with similar statements in higher-level specifications (e.g., a system requirements
- specification), if they exist.
-
- \subsubsection{Contextualización}
-El contexto que se va a desarrollar a continuación parte del concepto de Internet de las Cosas (IoT).
-
-Internet consiste en una red de usuarios y servidores conectadas entre sí.
-Sin embargo, existen conceptos más amplios que abarcan un conjunto de elementos todavía más ambicioso,
-como es el de IoT, que, además de los anteriores, incluye a cualquier objeto físico como participante de la red.
-
-De esta forma podemos ser capaces de interactuar con los objetos de manera remota, sin intervención física de
-una persona, o de manera automática.
-
-Además, podrían realizar sus tareas de forma más inteligente, ya que, al estar conectadas a internet, pueden
-disponer de mucha información útil para su objetivo.
-
-Desde que se empezó a aplicar el concepto de IoT, se puede ver que ha ocurrido una evolución y ha mejorando en
-muchos los aspectos: El presupuesto invertido en la IoT ha incrementado, el número de dispositivos ha crecido
-exponencialmente, ...
-
-También es destacable mencionar que la situación global de la COVID-19 ha incentivado y acelerado la aplicación
-de la IoT en diversos aspectos como la salud pública, la seguridad o la privacidad.
-(
-En los últimos años, el uso del IoT ha aumentado exponencialmente [ENSEÑAME LO QUE TIENES].
-Elnashar, A. \& El-saidny, M. (2018). IoT evolution towards a super-connected world. Wiley. \textit{Practical Guide to LTE-A, VoLTE and IoT: Paving the way towards 5G}. pp. 310-381. Wiley. https://doi.org/10.1002/9781119063407.ch7
-Ayman Elnashar; Mohamed A. El-saidny, "IoT Evolution Towards a Super‐connected World," in Practical Guide to LTE-A, VoLTE and IoT: Paving the way towards 5G , Wiley, 2018, pp.310-381, doi: 10.1002/9781119063407.ch7.
-
-)
-
-Entre de las ventajas más destacadas a la hora de usar IoT, podemos mencionar:
-\begin{itemize}
-    \item La sensorización: Permite obtener datos que anteriormente no podían ser recogidos de manera automática.
-    \item Acciones remotas: Los objetos que se conectan a la red pueden realizar acciones físicas desencadenadas por internet,
-      por lo que no tiene haber nadie presente ante el objeto para poder manipularlo o monitorizar su estado.
-    \item Interacción entre dispositivos IoT: Gracias a los modelos de comunicación, se pueden realizar tareas complejas
-      comunicando diferentes sensores y actuadores, de esta forma, se producen una secuencia de acciones sin necesidad
-      de intervención humana, que produce unos resultados dignos de categorizar como inteligentes.
-\end{itemize}
-
-\subsubsection{Problemática y oportunidades identificadas}
-De acuerdo con (Estevez et al., 2021), la densidad de población que habita en las ciudades crece aceleradamente.
-Se espera que para el 2030, un 60\% de las personas viva en las ciudades. 
-
-Al existir una migración tan importante de áreas rurales a urbanas, el entorno de la
-propia ciudad evoluciona más rápido y los retos a los que estas se enfrentan, o se espera que se enfrenten,
-también cambian notablemente: el transporte, impacto medioambiental, salud pública, servicios, etc. Son puntos
-críticos que merecen especial atención para mantener y mejorar el funcionamiento y la calidad de vida en
-las urbes.
-
-Todo esto sumado al crecimiento de las infraestructuras de telecomuncación (Banda ancha, wifi y 5G)
-y a las inversiones en inteligencia artificial y big data, abre la posiblidad de aplicar el IoT como
-posible solución y ofrecer mejoras a los gobiernos y ciudadanos, que ayuden a mejorar la gestión de las 
-ciudades, mejoren la calidad de vida en las mismas y sean lo más respetuosas con el entorno.
-
-Estevez E., Pardo, T., \& Scholl, J. (2021).
-Smart cities and smart governance: towards the 22nd century sustainable city. Springer.
-
-
-Otra motivación para usar el IoT viene de que se trata de  una tecnología relativamente reciente 
-y son muchos los campos en los que se puede aplicar para sacar ventaja.
-
-El potencial que se le puede sacar a esta red de dispositivos es muy elevado. Existen conceptos tales como:
- - IoT Orchestation
- - Fog Computing
-
-que pueden aportar a una transformación digital inteligente y sostenible de las ciudades.
-
-
- ---------------------
-
-Por otro lado, cuando se analiza cuál ha sido el avance del IoT desde sus comienzos,
-se puede llegar a la conclusión de que ha avanzado muy rápido, y todavía hay muchos 
-puntos en los que debe de madurar:
- - Interfaces de Estandarización (Discovery, semántica de datos)
- - Data Swamp (Discovery)
-
-Por lo que a la hora de hacer un desarrollo usando IoT se deben de tener en cuenta estos aspectos.
-
-
- Según el punto de vista de Fiware, las ciudades tienen 5 etapas en su camino a la digitalización inteligente:
- -
- -
- -
- -
- -
+% Describe the scope of the software under consideration by:
+% a) identifying the software product(s) to be produced by name (e.g., Host DBMS, Report Generator, etc.);
+% b) explaining what the software product(s) will do;
+% c) describing the application of the software being specified, including relevant benefits, objectives
+% and goals; and
+% d) being consistent with similar statements in higher-level specifications (e.g., a system requirements
+% specification), if they exist.
 
 \section{Visión general del producto}
 \subsubsection{Perspectiva del Producto}
