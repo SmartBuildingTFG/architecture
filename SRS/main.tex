@@ -79,7 +79,7 @@ Desde el punto de visto externo, IBuilding puede ser visto como un servicio de i
   \item permita conectar dispositivos IoT de la Smart Building a la red.
 \end{itemize}
 
-Para la implementación de esta interfaz Fiware es un candidato óptimo, ya que ofrece NGSI-LD,
+Para la implementación de esta interfaz Fiware es un candidato ideal, ya que ofrece NGSI-LD,
 una interfaz de comunicación reconocida por diferentes organismo importantes de referencia en toda la Unión Europea.
 
 Además, Fiware deja abierta la posiblidad de implementar otras interfaces que se usan en desarrollo de dispositivos
@@ -100,16 +100,14 @@ como la ETSI.
 % external interfaces.
 
 \subsubsection{Interfaces de Usuario}
-% Specify the logical characteristics of each interface between the software product and its users.
-% NOTE A style guide for the user interface can provide consistent rules for organization, coding and
-% interaction of the user with the system.
+Se utilizará como guía de diseño Material Design.
 
-\subsubsection{Interfaces Hardware}
-% Specify the logical characteristics of each interface between the software product and the hardware
-% elements of the system. This includes configuration characteristics (number of ports, instruction sets,
-% etc.). It also covers such matters as what devices are to be supported, how they are to be supported, and
-% protocols. For example, terminal support may specify full-screen support as opposed to line-by-line
-% support.
+Material Design es un ecosistema de diseños que siguen un conjunto de reglas para
+definir el estilo de la aplicación. 
+
+Son muchas las aplicaciones que hacen uso de esta guía desarrollada por Google y los resultados
+son muy profesionales e intuitivos.
+Material Design tiene unas especificaciones muy extensas y muy bien definidas. 
 
 \subsubsection{Interfaces Software}
 Para poder afirmar que un sistema está impulsado por Fiware, es necesario incluir un Context Broker del catálogo de Fiware.
@@ -119,7 +117,7 @@ Además, por cuestiones de Seguridad, también se incluirán IdM Keyrock y Wilma
 compatibles con NGSI-LD. 
 
 También se incluirá FogFlow como solución para orquestar flujos de trabajos que involucren a los dispositivos IoT. Esta solución 
-se beneficia de la computación en el borde para optimizar llamadas innecesarias a servidores y ahorrar tiempo y dinero por ahorro
+se beneficia de la computación en la niebla para optimizar llamadas innecesarias a servidores y ahorrar tiempo y dinero por ahorro
 de cómputos en servidores en la nube. Este servicio también tiene compatibilidad con NGSI-LD.
 
 Como último, se incluirán los IoT Agents: Softwares de Fiware que se encargan de adaptar la interfaz NGSI-LD a otros protocolos
@@ -139,13 +137,35 @@ son IoT Agent - Ultralight 2.0 y OpenMTC.
 \end{center}
 
 \subsubsubsection{NGSI-LD}
-// Explicación de NGSI-LD
-\subsubsubsection{IdM GE API}
-https://keyrock.docs.apiary.io/
+La interfaz NGSI-LD es muy apropiada para el proyecto. Está estandarizada por la ETSI y
+son muchas las aplicaciones de ámbitos inteligentes que lo utilizan.
 
+Tiene una base semántica muy bien definida sobre RDF y Semática Web, e implementa el Linked Data, 
+que permite interconectar los recursos por toda la web, por lo que le da más calidad y usabilidad
+a los datos.
+\subsubsubsection{IdM GE API}
+Es la interfaz que ofrece Identity Manager para manipular los datos de los usuario.
+Esta interfaz se utilizará para gestionar la seguridad del sistema.
+Se puede consultar su documentación desde los siguientes enlaces: 
+
+https://keyrock.docs.apiary.io/
 https://keyrock-fiware.github.io
 \subsubsubsection{Ultralight 2.0}
+Protocolo orientado a la comunicación entre dispositivos IoT.
+Sus características hacen que sea muy ligero y óptimo para el IoT, sobretodo
+en escenarios de recursos muy limitados.
+Se utilizará para ampliar las interfaces que ofrece el sistema al mundo exterior
+para incrementar las opciones de integración con otros dispositivos.
+
+https://fiware-iotagent-ul.readthedocs.io/en/latest/index.html
+
 \subsubsubsection{OneM2M}
+Es una organización cuyo objetivo es el de crear un estandar internacional para la interoperabilidad
+entre dispositivos físicos e internet.
+
+Con este estándar se pueden orquestar dispositivos IoT de una manera muy eficiente y óptima, además,
+también está reconocido por diversos organismos como la ETSII, por lo tanto también es interesante
+implementarlo, por su nivel de internacionalización y su verdadera utilidad en la IoT.
 % Specify the use of other required software products (e.g., a data management system, an operating
 % system or a mathematical package), and interfaces with other application systems (e.g., the linkage
 % between an accounts receivable system and a general ledger system).
@@ -157,12 +177,6 @@ https://keyrock-fiware.github.io
 % a) discussion of the purpose of the interfacing software as related to this software product;
 % b) definition of the interface in terms of message content and format. It is not necessary to detail any
 % well-documented interface, but a reference to the document defining the interface is required.
-
-\subsubsection{Interfaces de Comunicación}
-Specify the various interfaces to communications such as local network protocols.
-
-\subsubsection{Restricciones de Memoria}
-Specify any applicable characteristics and limits on primary and secondary memory.
 
 \subsubsection{Operaciones}
 Specify the normal and special operations required by the user such as:
