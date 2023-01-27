@@ -29,19 +29,33 @@ Debido a las características del software que hacen uso de las tecnologías
 la red de un Edificio Inteligente (Smart Building), se ha decidido darle el nombre de
 ``IBuilding''.
 
+% META
+IBuilding pretende ser un gestor de los edificios de una ciudad con el que
+poder consultar información sobre ellos y manipular sus dispositivos.
+ 
+ % OBJETIVO
+Para ello, IBuilding deberá almacenar datos de los edificios y 
+deberá disponer de herramientas para acceder y manipular los dispositivos que se instalen
+en los mismos.
+
+% Beneficio
+De esta manera, se puede enriquecer el valor de una ciudad, permitiendo digitalizar más
+datos sobre ella y poder generar una información más fiel y útil para que otras personas
+y servicios digitales puedan hacer uso de ella.
+
 IBuilding dispondrá de un servidor central (llamado DataBuilding) que, usando la tecnología
 de Fiware, almacenará los datos propios de cada edificio (como la ubicación o el 
 tipo de servicio que ofrecen) y los dispositivos disponibles en el mismo. 
 Se podrán consultar los datos a través de una API que usará modelos estándares 
 de datos.
 
-Por otro lado, para que los diferentes dispositivos se puedan integrar en el sistema,
-habrá una serie de microservicios que actuarán de puente entre cada dispositivo
-y el DataBuilding. (Los denominaremos Adapters, i.e. ElevatorAdapter para un ascensor)
+Los diferentes dispositivos necesitarán controladores que permitan conectarse
+a internet para poder manipularlos mediante algún API.
 
-También habrá una serie de microservicios que realizarán labores de análisis
-de datos y de orquestación, es decir, que controlarán de manera automática 
-los dipositivos. (Los llamados Processors, como ANNPlateProcessor)
+Como ejemplo se desarrollarán algunos Controllers, para hacer uso y alimentar a la API.
+Estos dotarán a los dispostivos (Ya sean físicos o virtuales) de acceso a internet, usando interfaces 
+estándares, como UltraLight 2.0, OneM2M o directamente NGSI-LD. Ejemplos de Controllers podrían
+ser SensorController o ANNPlateController.
 
 El desarrollo de una interfaz de usuario puede ser útil para la gestión de la plataforma
 a nivel usuario. Es por eso que también habrá un frontal para hacer uso de IBuilding
@@ -58,39 +72,146 @@ Para referirnos a este frontal usaremos el nombre de FrontalBuilding.
 
 \section{Visión general del producto}
 \subsubsection{Perspectiva del Producto}
- Define the system's relationship to other related products.
- If the product is an element of a larger system, relate the requirements of that larger system to the
- functionality of the product covered by the SRS.
- If the product is an element of a larger system, identify the interfaces between the product covered by
- the SRS and the larger system of which the product is an element.
- Consider a block diagram showing the major elements of the larger system, interconnections and
- external interfaces.
- Describe how the software operates within the following constraints:
- a) system interfaces;
- b) user interfaces;
- c) hardware interfaces;
- d) software interfaces;
- e) communications interfaces;
- f) memory;
- g) operations;
- h) site adaptation requirements; and
- i) interfaces with services.
+Desde el punto de visto externo, IBuilding puede ser visto como un servicio de integración que
+\begin{itemize}
+  \item ofrezca datos sobre los edificio a aplicaciones terceras.
+  \item permita controlar dispositivos mediante una API estándar y conocida.
+  \item permita conectar dispositivos IoT de la Smart Building a la red.
+\end{itemize}
 
- \section{Funciones del producto}
- Provide a summary of the major functions that the software will perform. For example, an SRS for an
- accounting program may use this part to address customer account maintenance, customer statement
- and invoice preparation without mentioning the vast amount of detail that each of those functions
- requires.
- Sometimes the function summary that is necessary for this part can be taken directly from the section
- of the higher-level specification (if one exists) that allocates particular functions to the software
- product.
- Use cases, user stories and scenarios are also used to describe product functions.
- Note that for the sake of clarity:
- a) the product functions should be organized in a way that makes the list of functions understandable
- to the acquirer or to anyone else reading the document for the first time.
- b) textual or graphical methods can be used to show the different functions and their relationships.
- Such a diagram is not intended to show a design of a product, but simply shows the logical
- relationships among variables.
+Para la implementación de esta interfaz Fiware es un candidato ideal, ya que ofrece NGSI-LD,
+una interfaz de comunicación reconocida por diferentes organismo importantes de referencia en toda la Unión Europea.
+
+Además, Fiware deja abierta la posiblidad de implementar otras interfaces que se usan en desarrollo de dispositivos
+IoT como UltraLight 2.0 o OneM2M, que también se considera un estándar reconocido por organismos
+como la ETSI.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{IBuildingGenericComponents.1.1.png}
+  \caption{Niveles de integración posibles siguiendo una aproximación con Gemelo Digital}
+\end{figure}
+% Define the system's relationship to other related products.
+% If the product is an element of a larger system, relate the requirements of that larger system to the
+% functionality of the product covered by the SRS.
+% If the product is an element of a larger system, identify the interfaces between the product covered by
+% the SRS and the larger system of which the product is an element.
+% Consider a block diagram showing the major elements of the larger system, interconnections and
+% external interfaces.
+
+\subsubsection{Interfaces de Usuario}
+Se utilizará como guía de diseño Material Design.
+
+Material Design es un ecosistema de diseños que siguen un conjunto de reglas para
+definir el estilo de la aplicación. 
+
+Son muchas las aplicaciones que hacen uso de esta guía desarrollada por Google y los resultados
+son muy profesionales e intuitivos.
+Material Design tiene unas especificaciones muy extensas y muy bien definidas. 
+
+\subsubsection{Interfaces Software}
+Para poder afirmar que un sistema está impulsado por Fiware, es necesario incluir un Context Broker del catálogo de Fiware.
+Se ha elegido Orion-LD Context Broker, por implementar la interfaz NGSI-LD y por sus características de tamaño.
+
+Además, por cuestiones de Seguridad, también se incluirán IdM Keyrock y Wilma, que son softwares completamente integrables y
+compatibles con NGSI-LD. 
+
+También se incluirá FogFlow como solución para orquestar flujos de trabajos que involucren a los dispositivos IoT. Esta solución 
+se beneficia de la computación en la niebla para optimizar llamadas innecesarias a servidores y ahorrar tiempo y dinero por ahorro
+de cómputos en servidores en la nube. Este servicio también tiene compatibilidad con NGSI-LD.
+
+Como último, se incluirán los IoT Agents: Softwares de Fiware que se encargan de adaptar la interfaz NGSI-LD a otros protocolos
+e interfaces para poder ampliar las interfaces de comunicación que se ofrecen. Los IoT Agents que se van a incluir en este proyecto
+son IoT Agent - Ultralight 2.0 y OpenMTC.
+\begin{center}
+  \begin{tabular}{ |c|c|c|c|c| } 
+   \hline
+   Nombre                     & Abreviatura & Última Versión & Interfaz Relevante & Fuente \\ \hline
+   Orion-LD Context Broker    & OCB         & 1.1.2          & NGSI-LD            & https://github.com/FIWARE/context.Orion-LD \\ \hline 
+   Identity Manager - Keyrock & IdM Keyrock & 8.3.1          & IdM GE API         & https://github.com/ging/fiware-idm \\ \hline
+   PEP Proxy - Wilma          & Wilma       & 8.3            & NGSI-LD            & https://github.com/ging/fiware-pep-proxy \\ \hline
+   FogFlow                    & FogFlow     & 3.2.8          & NGSI-LD            & https://github.com/smartfog/fogflow \\ \hline
+   IoT Agent - Ultralight 2.0 & IotAgentUL  & 1.23.0         & Ultralight 2.0     & https://github.com/telefonicaid/iotagent-ul \\ \hline
+   OpenMTC                    & OpenMTC     & 1.3.0          & OneM2M             & https://github.com/OpenMTC/OpenMTC \\ \hline
+  \end{tabular}
+\end{center}
+
+\subsubsubsection{NGSI-LD}
+La interfaz NGSI-LD es muy apropiada para el proyecto. Está estandarizada por la ETSI y
+son muchas las aplicaciones de ámbitos inteligentes que lo utilizan.
+
+Tiene una base semántica muy bien definida sobre RDF y Semática Web, e implementa el Linked Data, 
+que permite interconectar los recursos por toda la web, por lo que le da más calidad y usabilidad
+a los datos.
+\subsubsubsection{IdM GE API}
+Es la interfaz que ofrece Identity Manager para manipular los datos de los usuario.
+Esta interfaz se utilizará para gestionar la seguridad del sistema.
+Se puede consultar su documentación desde los siguientes enlaces: 
+
+https://keyrock.docs.apiary.io/
+https://keyrock-fiware.github.io
+\subsubsubsection{Ultralight 2.0}
+Protocolo orientado a la comunicación entre dispositivos IoT.
+Sus características hacen que sea muy ligero y óptimo para el IoT, sobretodo
+en escenarios de recursos muy limitados.
+Se utilizará para ampliar las interfaces que ofrece el sistema al mundo exterior
+para incrementar las opciones de integración con otros dispositivos.
+
+https://fiware-iotagent-ul.readthedocs.io/en/latest/index.html
+
+\subsubsubsection{OneM2M}
+Es una organización cuyo objetivo es el de crear un estandar internacional para la interoperabilidad
+entre dispositivos físicos e internet.
+
+Con este estándar se pueden orquestar dispositivos IoT de una manera muy eficiente y óptima, además,
+también está reconocido por diversos organismos como la ETSII, por lo tanto también es interesante
+implementarlo, por su nivel de internacionalización y su verdadera utilidad en la IoT.
+% Specify the use of other required software products (e.g., a data management system, an operating
+% system or a mathematical package), and interfaces with other application systems (e.g., the linkage
+% between an accounts receivable system and a general ledger system).
+% For each required software product, specify: name;  mnemonic; specification number; version number; and source.
+% NOTE It is acceptable to specify required platforms or operating systems, but rarely feasible to require a
+% specific version. Typically, a version number most recent version or any currently maintain version can be
+% specified for software.
+% For each interface, specify:
+% a) discussion of the purpose of the interfacing software as related to this software product;
+% b) definition of the interface in terms of message content and format. It is not necessary to detail any
+% well-documented interface, but a reference to the document defining the interface is required.
+
+\subsubsection{Operaciones}
+Specify the normal and special operations required by the user such as:
+a) the various modes of operations in the user organization (e.g., user-initiated operations);
+b) periods of interactive operations and periods of unattended operations;
+c) data processing support functions; and
+d) backup and recovery operations.
+NOTE This is sometimes specified as part of the User Interfaces section.
+
+\subsubsection{Site adaptation requirements}
+The site adaptation requirements include:
+a) definition of the requirements for any data or initialization sequences that are specific to a given
+site, mission or operational mode (e.g., grid values, safety limits, etc.);
+b) specification of the site or mission-related features that should be modified to adapt the software
+to a particular installation.
+
+\subsubsection{Interfaces with services}
+Specify interactions with services, e.g., Software as a Service (SaaS) or cloud services.
+
+
+\section{Funciones del producto}
+Provide a summary of the major functions that the software will perform. For example, an SRS for an
+accounting program may use this part to address customer account maintenance, customer statement
+and invoice preparation without mentioning the vast amount of detail that each of those functions
+requires.
+Sometimes the function summary that is necessary for this part can be taken directly from the section
+of the higher-level specification (if one exists) that allocates particular functions to the software
+product.
+Use cases, user stories and scenarios are also used to describe product functions.
+Note that for the sake of clarity:
+a) the product functions should be organized in a way that makes the list of functions understandable
+to the acquirer or to anyone else reading the document for the first time.
+b) textual or graphical methods can be used to show the different functions and their relationships.
+Such a diagram is not intended to show a design of a product, but simply shows the logical
+relationships among variables.
 
  \subsubsection{Características de los Usuarios}
  Describe those general characteristics of the intended groups of users of the product including
@@ -169,64 +290,6 @@ use in specific contexts of use.
 NOTE Additional guidance on usability requirements can be found in ISO/IEC TR 25060.
 
 \subsection{Requisitos de Interfaces}
-
- \subsubsection{Interfaces del Sistema}
- List each system interface and identify the functionality of the software to accomplish the system
- requirement and the interface description to match the system.
-
- \subsubsection{Interfaces de Usuario}
- Specify the logical characteristics of each interface between the software product and its users.
- NOTE A style guide for the user interface can provide consistent rules for organization, coding and
- interaction of the user with the system.
-
- \subsubsection{Interfaces Hardware}
- Specify the logical characteristics of each interface between the software product and the hardware
- elements of the system. This includes configuration characteristics (number of ports, instruction sets,
- etc.). It also covers such matters as what devices are to be supported, how they are to be supported, and
- protocols. For example, terminal support may specify full-screen support as opposed to line-by-line
- support.
-
- \subsubsection{Interfaces Software}
- Specify the use of other required software products (e.g., a data management system, an operating
- system or a mathematical package), and interfaces with other application systems (e.g., the linkage
- between an accounts receivable system and a general ledger system).
- For each required software product, specify:
- a) name;
- b) mnemonic;
- c) specification number;
- d) version number; and
- e) source.
- NOTE It is acceptable to specify required platforms or operating systems, but rarely feasible to require a
- specific version. Typically, a version number most recent version or any currently maintain version can be
- specified for software.
- For each interface, specify:
- a) discussion of the purpose of the interfacing software as related to this software product;
- b) definition of the interface in terms of message content and format. It is not necessary to detail any
- well-documented interface, but a reference to the document defining the interface is required.
-
- \subsubsection{Interfaces de Comunicación}
- Specify the various interfaces to communications such as local network protocols.
-
- \subsubsection{Restricciones de Memoria}
- Specify any applicable characteristics and limits on primary and secondary memory.
-
- \subsubsection{Operaciones}
- Specify the normal and special operations required by the user such as:
- a) the various modes of operations in the user organization (e.g., user-initiated operations);
- b) periods of interactive operations and periods of unattended operations;
- c) data processing support functions; and
- d) backup and recovery operations.
- NOTE This is sometimes specified as part of the User Interfaces section.
-
- \subsubsection{Site adaptation requirements}
- The site adaptation requirements include:
- a) definition of the requirements for any data or initialization sequences that are specific to a given
- site, mission or operational mode (e.g., grid values, safety limits, etc.);
- b) specification of the site or mission-related features that should be modified to adapt the software
- to a particular installation.
-
- \subsubsection{Interfaces with services}
- Specify interactions with services, e.g., Software as a Service (SaaS) or cloud services.
 
  \subsubsection{Interfaces externas}
  Define all inputs into and outputs from the software system. The description should complement the
