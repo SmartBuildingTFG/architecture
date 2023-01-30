@@ -201,20 +201,40 @@ Specify interactions with services, e.g., Software as a Service (SaaS) or cloud 
 
 
 \section{Funciones del producto}
-Provide a summary of the major functions that the software will perform. For example, an SRS for an
-accounting program may use this part to address customer account maintenance, customer statement
-and invoice preparation without mentioning the vast amount of detail that each of those functions
-requires.
-Sometimes the function summary that is necessary for this part can be taken directly from the section
-of the higher-level specification (if one exists) that allocates particular functions to the software
-product.
-Use cases, user stories and scenarios are also used to describe product functions.
-Note that for the sake of clarity:
-a) the product functions should be organized in a way that makes the list of functions understandable
-to the acquirer or to anyone else reading the document for the first time.
-b) textual or graphical methods can be used to show the different functions and their relationships.
-Such a diagram is not intended to show a design of a product, but simply shows the logical
-relationships among variables.
+Cualquier persona podrá:
+ Registrarse y loguearse en la aplicación y podrá visualizar un mapa con los edificios cercanos.
+ Listar los edificios con diferentes filtros (tipos de edificio, por distancia, ...)
+ Visualizar la información del edificio si tiene permisos.
+
+Creación y configuración del Edificio:
+ Un usuario podrá crear edificios. Para ello rellenará un formulario con los datos necesarios que
+ tendrán que ser revisado por un adminsitrador del sistema.
+ Una vez creado un edificio se podrá gestionar la información del mismo y añadir dispositivos IoT oportunos.
+
+Roles en un edificio:
+ Usuarios tendrán roles dentro de un edificio. La información y el uso de los dispositivos a los cuales
+ los usuarios pueden acceder se puede configurar por roles.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{UserCase.0.1.png}
+  \caption{Diagrama de casos de uso}
+\end{figure}
+
+% Provide a summary of the major functions that the software will perform. For example, an SRS for an
+% accounting program may use this part to address customer account maintenance, customer statement
+% and invoice preparation without mentioning the vast amount of detail that each of those functions
+% requires.
+% Sometimes the function summary that is necessary for this part can be taken directly from the section
+% of the higher-level specification (if one exists) that allocates particular functions to the software
+% product.
+% Use cases, user stories and scenarios are also used to describe product functions.
+% Note that for the sake of clarity:
+% a) the product functions should be organized in a way that makes the list of functions understandable
+% to the acquirer or to anyone else reading the document for the first time.
+% b) textual or graphical methods can be used to show the different functions and their relationships.
+% Such a diagram is not intended to show a design of a product, but simply shows the logical
+% relationships among variables.
 
  \subsubsection{Características de los Usuarios}
  El usuario objetivo es aquel que vive en ciudades grandes con un nivel tecnológico avanzado,
