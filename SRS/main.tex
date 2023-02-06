@@ -281,22 +281,38 @@ Roles en un edificio:
 \section{Referencias}
 
 \section{Requisitos}
-\subsection{Funciones}
-Define the fundamental actions that have to take place in the software in accepting and processing the
-inputs and in processing and generating the outputs, including:
-a) validity checks on the inputs;
-b) exact sequence of operations;
-c) responses to abnormal situations, including:
-1) overflow;
-2) communication facilities;
-3) hardware faults and failures; and
-4) error handling and recovery;
-d) effect of parameters;
-e) relationship of outputs to inputs, including:
-1) input/output sequences; and
-2) formulas for input to output conversion.
-It may be appropriate to partition the functional requirements into sub-functions or sub-processes.
-This does not imply that the software design will also be partitioned that way.
+\subsection{Funcionales}
+\begin{center}
+  \begin{tabular}{ |c|c|c|c|c| } 
+  \hline
+  ID      & Título & Descripción \\ \hline
+  RF-EDI1 & RUD edificios & Se pueden manejar los datos de un edificio. 
+    Cualquier usuario podrá visualizar los edificios validados. 
+    Los editores y el usuario que envió la solicitud de creación del edificio (creador) podrá editar los datos.
+    El creador del edificio o cualquier administrador de la plataforma será el único que podrá borrarlo.  \\ \hline
+  % NF: Como lo ordeno, filtros, buscador... Detalles de la vista de detalles del edificio (mapa, salseo...)
+  RF-EDI2 & Solicitud de creación de edificio & Cualquier usuario logueado puede solicitar la creación de un edificio rellenando un formulario. Al enviar los datos se insertan en la base de datos con un atributo que indique su estado, quedando solamente visibles para los administradores. \\ \hline
+  RF-EDI3 & Aceptar solicitud de creación de edificio & Un administrador podrá aceptar solicitudes de creación de un edificio. Una vez aceptadas cambia el estado a aprobado y pasan a ser visibles para todos los usuarios \\ \hline
+  RF-EDI4 & Denegar solicitud de creación de edificio & Un administrador podrá denegar solicitudes de creación de un edificio. Cuando se rechazen, estos se eliminarán de la base de datos. \\ \hline
+  
+  RF-USU1 & RUD de Usuarios & Los usuarios logueados podrán visualizar los perfiles de otras personas, actualizar sus datos o darse de baja. \\ \hline
+  % Voy a utilizar (no me acuerdo como se llama) La cosa esta de auth de fiware.
+  RF-USU2 & Registro en la aplicación & Cualquier usuario podrá registrarse en el sistema. \\ \hline 
+  RF-USU3 & Validación del acceso & Cualquier usuario registrado podrá iniciar sesión en la aplicación usando las credenciales proporcionadas en el registro. \\ \hline
+  % NF: CUALQUIER USUARIO REGISTRADO O NO PODRÁ ACCEDER A LA APLICACIÓN. UN USUARIO NO REGISTRADO ENTRARÁ DE FORMA ANÓNIMA.
+  RF-USU4 & Cerrar sesión & Cualquier usuario logueado podrá cerrar sesión. \\ \hline
+  % NF: EL TOKEN GENERADO SE GUARDARÁ EN SESSION STGORATE... USARE JSONWEWTOKEN... DURACIÓN DE SESIÓN? 24H? ES PREGUNTA.
+
+  RF-ROL1 & Maestro roles de la aplicación & Hay 3 roles en la aplicación: administrador, usuario y anónimo. \\ \hline
+  RF-ROL2 & Maestro roles de un edificio & Cualquier usuario registrado podrá tener 1 rol de los siguientes en cada edificio: creador, editor, miembro, público \\ \hline
+  RF-ROL3 & Otorgar rol de edficio & El creador de un edificio podrá otorgar roles en su edificio a cualquier usuario registrado en la aplicación. El criterio para otorgar los roles queda a cargo del creador. \\ \hline
+
+  RF-XXX0 & Acceso a la página de inicio & Cualquier usuario puede acceder a la página principal. \\ \hline
+
+  RF-DIS1 & CRUD dispositivos & - \\ \hline
+
+  \end{tabular}
+\end{center}
 
 \subsection{Requisitos de Rendimiento}
 Specify both the static and the dynamic numerical requirements placed on the software or on human
