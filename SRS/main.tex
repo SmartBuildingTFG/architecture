@@ -62,14 +62,6 @@ a nivel usuario. Es por eso que también habrá un frontal para hacer uso de IBu
 que se conectará al DataBuilding y podrá visualizar/modificar los datos oportunos.
 Para referirnos a este frontal usaremos el nombre de FrontalBuilding.
 
-% Describe the scope of the software under consideration by:
-% a) identifying the software product(s) to be produced by name (e.g., Host DBMS, Report Generator, etc.);
-% b) explaining what the software product(s) will do;
-% c) describing the application of the software being specified, including relevant benefits, objectives
-% and goals; and
-% d) being consistent with similar statements in higher-level specifications (e.g., a system requirements
-% specification), if they exist.
-
 \section{Visión general del producto}
 \subsubsection{Perspectiva del Producto}
 Desde el punto de visto externo, IBuilding puede ser visto como un servicio de integración que
@@ -91,13 +83,6 @@ como la ETSI.
   \includegraphics[width=0.8\textwidth]{IBuildingGenericComponents.1.1.png}
   \caption{Niveles de integración posibles siguiendo una aproximación con Gemelo Digital}
 \end{figure}
-% Define the system's relationship to other related products.
-% If the product is an element of a larger system, relate the requirements of that larger system to the
-% functionality of the product covered by the SRS.
-% If the product is an element of a larger system, identify the interfaces between the product covered by
-% the SRS and the larger system of which the product is an element.
-% Consider a block diagram showing the major elements of the larger system, interconnections and
-% external interfaces.
 
 \subsubsection{Interfaces de Usuario}
 Se utilizará como guía de diseño Material Design.
@@ -169,36 +154,6 @@ entre dispositivos físicos e internet.
 Con este estándar se pueden orquestar dispositivos IoT de una manera muy eficiente y óptima, además,
 también está reconocido por diversos organismos como la ETSII, por lo tanto también es interesante
 implementarlo, por su nivel de internacionalización y su verdadera utilidad en la IoT.
-% Specify the use of other required software products (e.g., a data management system, an operating
-% system or a mathematical package), and interfaces with other application systems (e.g., the linkage
-% between an accounts receivable system and a general ledger system).
-% For each required software product, specify: name;  mnemonic; specification number; version number; and source.
-% NOTE It is acceptable to specify required platforms or operating systems, but rarely feasible to require a
-% specific version. Typically, a version number most recent version or any currently maintain version can be
-% specified for software.
-% For each interface, specify:
-% a) discussion of the purpose of the interfacing software as related to this software product;
-% b) definition of the interface in terms of message content and format. It is not necessary to detail any
-% well-documented interface, but a reference to the document defining the interface is required.
-
-\subsubsection{Operaciones}
-Specify the normal and special operations required by the user such as:
-a) the various modes of operations in the user organization (e.g., user-initiated operations);
-b) periods of interactive operations and periods of unattended operations;
-c) data processing support functions; and
-d) backup and recovery operations.
-NOTE This is sometimes specified as part of the User Interfaces section.
-
-\subsubsection{Site adaptation requirements}
-The site adaptation requirements include:
-a) definition of the requirements for any data or initialization sequences that are specific to a given
-site, mission or operational mode (e.g., grid values, safety limits, etc.);
-b) specification of the site or mission-related features that should be modified to adapt the software
-to a particular installation.
-
-\subsubsection{Interfaces with services}
-Specify interactions with services, e.g., Software as a Service (SaaS) or cloud services.
-
 
 \section{Funciones del producto}
 Cualquier persona podrá:
@@ -221,21 +176,6 @@ Roles en un edificio:
   \caption{Diagrama de casos de uso}
 \end{figure}
 
-% Provide a summary of the major functions that the software will perform. For example, an SRS for an
-% accounting program may use this part to address customer account maintenance, customer statement
-% and invoice preparation without mentioning the vast amount of detail that each of those functions
-% requires.
-% Sometimes the function summary that is necessary for this part can be taken directly from the section
-% of the higher-level specification (if one exists) that allocates particular functions to the software
-% product.
-% Use cases, user stories and scenarios are also used to describe product functions.
-% Note that for the sake of clarity:
-% a) the product functions should be organized in a way that makes the list of functions understandable
-% to the acquirer or to anyone else reading the document for the first time.
-% b) textual or graphical methods can be used to show the different functions and their relationships.
-% Such a diagram is not intended to show a design of a product, but simply shows the logical
-% relationships among variables.
-
  \subsubsection{Características de los Usuarios}
  El usuario objetivo es aquel que vive en ciudades grandes con un nivel tecnológico avanzado,
  por lo tanto, es un usuario familirializado con las tecnologías y que hace un uso
@@ -255,23 +195,6 @@ Roles en un edificio:
  % NOTE 1 Where appropriate, the user characteristics of the SyRS and SRS are consistent.
  % NOTE 2 For additional information on context of use and user needs, see ISO/IEC 25063 and ISO/IEC 25064.
 
- \subsubsection{Limitaciones}
- Provide a general description of any other items that will limit the supplier's options, including:
- a) regulatory requirements and policies;
- b) hardware limitations (e.g., signal timing requirements);
- c) interfaces to other applications;
- d) parallel operation;
- e) audit functions;
- f) control functions;
- g) higher-order language requirements;
- h) signal handshake protocols (e.g., XON-XOFF, ACK-NACK);
- i) quality requirements (e.g., reliability);
- j) criticality of the application;
- k) safety and security considerations;
- l) physical/mental considerations; and
- m) limitations that are sourced from other systems, including real-time requirements from the
- controlled system through interfaces.
-
 \subsection{Definiciones}
 \begin{itemize}
     \item \textbf{Sensores}\ttab Los sensores son dispositivos IoT cuya labor principal es recolectar datos.
@@ -281,7 +204,7 @@ Roles en un edificio:
 \section{Referencias}
 
 \section{Requisitos}
-\subsection{Funcionales}
+\subsection{Requisitos funcionales}
 \begin{center}
   \begin{tabular}{ |c|c|c|c|c| } 
   \hline
@@ -307,153 +230,32 @@ Roles en un edificio:
   RF-ROL2 & Maestro roles de un edificio & Cualquier usuario registrado podrá tener 1 rol de los siguientes en cada edificio: creador, editor, miembro, público \\ \hline
   RF-ROL3 & Otorgar rol de edficio & El creador de un edificio podrá otorgar roles en su edificio a cualquier usuario registrado en la aplicación. El criterio para otorgar los roles queda a cargo del creador. \\ \hline
 
-  RF-XXX0 & Acceso a la página de inicio & Cualquier usuario puede acceder a la página principal. \\ \hline
+  RF-INI1 & Acceso a la página de inicio & Cualquier usuario puede acceder a la página principal. \\ \hline
 
-  RF-DIS1 & CRUD dispositivos & - \\ \hline
-
+  RF-DIS1 & CRUD dispositivos & Dentro de un edificio se podrán incluir dipositivos IoT que interactúen con otros usuarios, entendiendo por 
+  interacción la lectura de datos o activarlos para que realicen alguna función.
+  El creador o los editores de un edificio podrán añadir, editar o eliminar nuevos dispositivos al mismo. Podrán indicar la visibilidad de los datos: 
+  \begin{itemize}
+    \item público: Cualquier usuario que acceda al edificio podrá interactuar con el dispositivo.
+    \item privado: Solo los usuarios que tengan uno de los siguientes roles: creador, editor o miembro, podrán interactuar con el dispositivo.
+  \end{itemize}
+  \\ \hline
   \end{tabular}
 \end{center}
 
-\subsection{Requisitos de Rendimiento}
-Specify both the static and the dynamic numerical requirements placed on the software or on human
-interaction with the software as a whole.
-Static numerical requirements may include the following:
-a) the number of terminals to be supported;
-b) the number of simultaneous users to be supported; and
-c) the amount and type of information to be handled.
-Static numerical requirements are sometimes identified under a separate section entitled Capacity.
-Dynamic numerical requirements may include, for example, the numbers of transactions and tasks and
-the amount of data to be processed within certain time periods for both normal and peak workload
-conditions.
-The performance requirements should be stated in measurable terms.
-For example,
-95 \% of the transactions shall be processed in less than 1 s.
-rather than,
-An operator shall not have to wait for the transaction to complete.
-NOTE Numerical limits applied to one specific function are normally specified as part of the processing
-subparagraph description of that function.
+ \subsection{Requisitos no funcionales}
+ \begin{center}
+  \begin{tabular}{ |c|c|c|c|c| } 
+  \hline
+  ID      & Título & Descripción \\ \hline
+  RNF- & CRUD dispositivos & - \\ \hline
 
-\subsection{Requisitos de Usabilidad}
-Define usability and quality in use requirements and objectives for the software system that can include
-measurable effectiveness, efficiency, satisfaction criteria and avoidance of harm that could arise from
-use in specific contexts of use.
-NOTE Additional guidance on usability requirements can be found in ISO/IEC TR 25060.
-
-\subsection{Requisitos de Interfaces}
-
- \subsubsection{Interfaces externas}
- Define all inputs into and outputs from the software system. The description should complement the
- interface descriptions in 9.6.4.1 through 9.6.4.5, and should not repeat information there.
- Each interface defined should include the following content:
- a) name of item;
- b) description of purpose;
- c) source of input or destination of output;
- d) valid range, accuracy and/or tolerance;
- e) units of measure;
- f) timing;
- g) relationships to other inputs/outputs;
- h) data formats;
- i) command formats; and
- j) data items or information included in the input and output.
-
- \subsection{Logical database requirements}
- Specify the logical requirements for any information that is to be placed into a database, including:
- a) types of information used by various functions;
- b) frequency of use;
- c) accessing capabilities;
- d) data entities and their relationships;
- e) integrity constraints;
- f) security; and
- g) data retention requirements.
-
- \subsection{Restricciones de Diseño}
- Specify constraints on the system design imposed by external standards, regulatory requirements or
- project limitations.
-
- \subsection{Software system attributes}
- Specify the required attributes of the software product. The following is a partial list of examples:
- a) Reliability - specify the factors required to establish the required reliability of the software system
- at the time of delivery.
- b) Availability - specify the factors required to guarantee a defined availability level for the entire
- system such as checkpoint, recovery and restart.
- c) Security - specify the requirements to protect the software from accidental or malicious access,
- use modification, destruction or disclosure. Specific requirements in this area could include the
- need to:
- 1) utilize certain cryptographic techniques;
- 2) keep specific log or history data sets;
- 3) assign certain functions to different modules;
- 4) restrict communications between some areas of the programme;
- 5) check data integrity for critical variables; and
- 6) assure data privacy.
- d) Maintainability - specify attributes of software that relate to the ease of maintenance of the
- software itself. These may include requirements for certain modularity, interfaces or complexity
- limitation. Requirements should not be placed here just because they are thought to be good design
- practices.
- e) Portability - specify attributes of software that relate to the ease of porting the software to other
- host machines and/or operating systems, including:
- 1) percentage of elements with host-dependent code;
- 2) percentage of code that is host dependent;
- 3) use of a proven portable language;
- 4) use of a particular compiler or language subset; and
- 5) use of a particular operating system.
-
- \subsection{Información de Soporte}
- Additional supporting information to be considered includes:
- a) sample input/output formats, descriptions of cost analysis studies or results of user surveys;
- b) supporting or background information that can help the readers of the SRS;
- c) a description of the problems to be solved by the software; and
- d) special packaging instructions for the code and the media to meet security, export, initial loading
- or other requirements.
- The SRS should explicitly state whether or not these information items are to be considered part of the
- requirements.
-
- \section{Apportioning of requirements???}
- Apportion the software requirements to software elements. For requirements that will require
- implementation over multiple software elements, or when allocation to a software element is initially
- undefined, this should be so stated. A cross-reference table by function and software element should be
- used to summarize the apportionments.
- Identify requirements that may be delayed until future versions of the system (e.g., blocks and/or
- increments).
-
- \section{Specified requirements???}
- Specify the software system requirements to a level of detail sufficient for software design, development
- and verification of the software increment or release in process.
- The requirements should:
- a) be stated in conformance with all the characteristics described in 5.2 of this document;
- b) be cross-referenced to earlier versions or related documents;
- c) be uniquely identifiable;
- d) describe every input (stimulus) into the software system, every output (response) from the
- software system, and all functions performed by the software system in response to an input or in
- support of an output.
-
- \section{Standards compliance???}
- Specify the requirements derived from existing standards or regulations, including:
- a) report format;
- b) data naming;
- c) accounting procedures; and
- d) audit tracing.
- For example, this could specify the requirement for software to trace processing activity. Such traces
- are needed for some applications to meet minimum regulatory or financial standards. An audit trace
- requirement may, for example, state that all changes to a payroll database shall be recorded in a trace
- file with before and after values.
-
- \section{Verificación}
- Provide the verification approaches and methods planned to qualify the software. The information
- items for verification are recommended to be given in a parallel manner with the information items in
- 9.6.10 to 9.6.18.
-
+  \end{tabular}
+\end{center}
 \section{Apéndice}
-\subsection{Suposiciones y dependencias}
-List each of the factors that affect the requirements stated in the SRS. These factors are not design
-constraints on the software but any changes to these factors can affect the requirements in the SRS.
-For example, an assumption may be that a specific operating system will be available on the hardware
-designated for the software product. If, in fact, the operating system is not available, the SRS would
-have to change accordingly.
 \subsection{Acrónimos y Abreviaturas}
 \begin{itemize}
     \item \textbf{IoT}\ttab Internet de las Cosas.
     \item \textbf{API}\ttab Application Program Interface.
   \end{itemize}
-
-
 \end{document}
