@@ -132,7 +132,11 @@ Tiene una base semántica muy bien definida sobre RDF y Semática Web, e impleme
 que permite interconectar los recursos por toda la web, por lo que le da más calidad y usabilidad
 a los datos.
 \subsubsubsection{IdM GE API}
-Es la interfaz que ofrece Identity Manager para manipular los datos de los usuario.
+La seguridad en la IoT es un asunto muy crítico, ya que son muchos procesos que se ejecutan automáticamente
+desde diversos microservicios y dipositivos que necesitan validar su autenticidad.
+
+Por este motivo se pretende utilizar Identity Manager, que implementa protocolos de seguridad
+actuales, como OAuth2.0 para manipular los datos de los usuarios y es compatible con Fiware.
 Esta interfaz se utilizará para gestionar la seguridad del sistema.
 Se puede consultar su documentación desde los siguientes enlaces: 
 
@@ -188,13 +192,6 @@ Roles en un edificio:
  no estén tan habituadas a usar ciertas aplicaciones o que tengan algún nivel de discapacidad
  que dificulte su utilización.
 
- % Describe those general characteristics of the intended groups of users of the product including
- % characteristics that may influence usability, such as educational level, experience, disabilities and
- % technical expertise. This description should not state specific requirements, but rather should state the
- % reasons why certain specific requirements are later specified in specific requirements in 9.6.9.
- % NOTE 1 Where appropriate, the user characteristics of the SyRS and SRS are consistent.
- % NOTE 2 For additional information on context of use and user needs, see ISO/IEC 25063 and ISO/IEC 25064.
-
 \subsection{Definiciones}
 \begin{itemize}
     \item \textbf{Sensores}\ttab Los sensores son dispositivos IoT cuya labor principal es recolectar datos.
@@ -247,8 +244,28 @@ Roles en un edificio:
  \begin{center}
   \begin{tabular}{ |c|c|c|c|c| } 
   \hline
-  ID      & Título & Descripción \\ \hline
-  RNF- & CRUD dispositivos & - \\ \hline
+  ID       & Título & Descripción \\ \hline
+  RNF-EDI1 & Ordenación en el listado de edificios & Los edificios se ordenarán por cercanía a la ubicación de la persona si se pudiera utilizar.
+  En caso de no estar disponible, se ordenará por orden alfabético. \\ \hline
+
+  RNF-EDI2 & Filtrado en el listado de ordenación de edificios & Los edificios se podrán filtrar por nombre, tipo de edificio, distancia o
+  si tiene algún rol especial en ese edificio. \\ \hline
+
+  RNF-EDI3 & Detalles de un edificio & Se podrán visualizar los detalles de un edficio. En la vista de los detalles, se incluirá
+  un mapa mostrando la ubicación del edificio. \\ \hline
+  % NF: Como lo ordeno, filtros, buscador... Detalles de la vista de detalles del edificio (mapa, salseo...)
+
+  RNF-USU1 & Servicio de Autenticación de Fiware & Se utilizarán los microservicios de autenticación de Identity Manager 
+  para la autenticación de los usuarios y de los dispositivos en el sistema por compatibilidad con Fiware. \\ \hline
+  % Voy a utilizar (no me acuerdo como se llama) La cosa esta de auth de fiware.
+  
+  RNF-USU2 & Acceso anónimo & Cualquier usuario registrado o no podrá acceder a la aplicación. Un usuario no registrado entrará de forma anónima. \\ \hline
+  % NF: CUALQUIER USUARIO REGISTRADO O NO PODRÁ ACCEDER A LA APLICACIÓN. UN USUARIO NO REGISTRADO ENTRARÁ DE FORMA ANÓNIMA.
+  
+  RNF-USU3 & Token de sesión  & Se utilizará un token de sesión JWT 
+   que expirará cada 24 horas
+   y que la aplicación guardará en el session storage  \\ \hline
+  % NF: EL TOKEN GENERADO SE GUARDARÁ EN SESSION STGORATE... USARE JSONWEWTOKEN... DURACIÓN DE SESIÓN? 24H? ES PREGUNTA.
 
   \end{tabular}
 \end{center}
