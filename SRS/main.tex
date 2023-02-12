@@ -5,6 +5,7 @@
 \usepackage{tabto}
 \usepackage{hyperref}
 \usepackage{makecell}
+\usepackage{longtable}
 \hypersetup{
   colorlinks=true,
   linkcolor=blue,
@@ -213,33 +214,34 @@ Roles en un edificio:
 
 \section{Requisitos}
 \subsection{Requisitos funcionales}
-\begin{table}
-  \footnotesize
-  \begin{tabular}{ |c|c|l| }
+{\footnotesize
+\begin{longtable}{ |c|c|l| }
   \hline
   ID      & Título & Descripción \\ \hline
   RF-EDI1 & RUD edificios & \makecell[l]{Se pueden manejar los datos de un edificio: \\
-    Cualquier usuario podrá visualizar los datos de edificios validados. \\
-    Los editores y el usuario que envió la solicitud de creación del edificio \\ 
-    (creador) podrá editar los datos. \\
-    El creador del edificio o cualquier administrador de la plataforma será \\
-    el único que podrá borrarlo.
-    }  \\ \hline
+    Cualquier usuario podrá visualizar los datos de edificios \\
+    validados. Los editores y el usuario que envió la solicitud\\
+    de creación del edificio (creador) podrá editar los datos. \\
+    El creador del edificio o cualquier administrador de la \\
+    plataforma será el único que podrá borrarlo.
+    } \\ \hline
   % NF: Como lo ordeno, filtros, buscador... Detalles de la vista de detalles del edificio (mapa, salseo...)
   RF-EDI2 & \makecell{Solicitud de \\ creación de edificio}
-    & \makecell[l]{Cualquier usuario logueado puede solicitar la creación de un \\ 
-    edificio rellenando un formulario. Al enviar los datos se insertan en \\
-    la base de datos con un atributo que indique su estado, quedando \\
-    solamente visibles para los administradores. 
+    & \makecell[l]{Cualquier usuario logueado puede solicitar la creación\\
+    de un edificio rellenando un formulario. Al enviar los datos \\
+    se insertan en la base de datos con un atributo que indique \\
+    su estado, quedando solamente visibles para los
+    \\ administradores. 
     } \\ \hline
   RF-EDI3 & \makecell{Aceptar solicitud \\ creación de edificio}
-    & \makecell[l]{Un administrador podrá aceptar solicitudes de creación de un edificio. \\
-    Una vez aceptadas cambia el estado a aprobado y pasan a ser visibles \\
-    para todos los usuarios 
+    & \makecell[l]{Un administrador podrá aceptar solicitudes de creación de \\
+    un edificio. Una vez aceptadas cambia el estado a aprobado \\
+    y pasan a ser visibles para todos los usuarios.
     }\\ \hline
   RF-EDI4 & \makecell{Denegar solicitud \\ creación de edificio}
-    & \makecell[l]{Un administrador podrá denegar solicitudes de creación de un edificio. \\
-    Cuando se rechazen, estos se eliminarán de la base de datos. 
+    & \makecell[l]{Un administrador podrá denegar solicitudes de creación de \\
+    un edificio. Cuando se rechazen, estos se eliminarán de la \\
+    base de datos. 
     } \\ \hline
   
   RF-USU1 & RUD de Usuarios 
@@ -251,8 +253,9 @@ Roles en un edificio:
   & Cualquier usuario podrá registrarse en el sistema. 
   \\ \hline 
   RF-USU3 & Validación del acceso 
-  & \makecell[l]{Cualquier usuario registrado podrá iniciar sesión en la aplicación\\
-  usando las credenciales proporcionadas en el registro.
+  & \makecell[l]{Cualquier usuario registrado podrá iniciar sesión \\
+  en la aplicación usando las credenciales proporcionadas \\
+  en el registro.
    } \\ \hline
   % NF: CUALQUIER USUARIO REGISTRADO O NO PODRÁ ACCEDER A LA APLICACIÓN. UN USUARIO NO REGISTRADO ENTRARÁ DE FORMA ANÓNIMA.
   RF-USU4 & Cerrar sesión & Cualquier usuario logueado podrá cerrar sesión. \\ \hline
@@ -261,82 +264,93 @@ Roles en un edificio:
 
   RF-ROL1 & Otorgar rol de edficio 
   & \makecell[l]{El creador de un edificio podrá otorgar roles en su edificio \\
-  a cualquier usuario registrado en la aplicación. El criterio para otorgar \\
-  los roles queda a cargo del creador.
+  a cualquier usuario registrado en la aplicación. El criterio \\
+  para otorgar los roles queda a cargo del creador.
   } \\ \hline
  
   RF-INI1 & Acceso a la página de inicio & Cualquier usuario puede acceder a la página principal. \\ \hline
  
   RF-DIS1 & CRUD dispositivos 
   & \makecell[l]{Dentro de un edificio se podrán incluir dipositivos IoT que \\
-    interactúen con otros usuarios, entendiendo por interacción la lectura de \\
-    datos o activarlos para que realicen alguna función. El creador o los \\
-    editores de un edificio podrán añadir, editar o eliminar nuevos \\
-    dispositivos al mismo. Podrán indicar la visibilidad de los datos: \\
-    público: Cualquier usuario que acceda al edificio podrá interactuar \\
-    con el dispositivo. \\
-    privado: Solo los usuarios que tengan uno de los siguientes roles: \\
-    creador, editor o miembro, podrán interactuar con el dispositivo.
+    interactúen con otros usuarios, entendiendo por\\
+    interacción la lectura de datos o activarlos para\\
+    que realicen alguna función.\\
+    El creador o los editores de un edificio podrán \\ 
+    añadir, editar o eliminar nuevos dispositivos al mismo. \\
+    Podrán indicar la visibilidad de los datos: \\
+    público: Cualquier usuario que acceda al edificio podrá \\
+    interactuar con el dispositivo. \\
+    privado: Solo los usuarios que tengan uno de los siguientes\\ 
+    roles: creador, editor o miembro, podrán interactuar con \\
+    el dispositivo.
   } \\ \hline
-  \end{tabular}
-\end{table}
-
+\end{longtable}
+}
+{\footnotesize
  \subsection{Requisitos no funcionales}
- \begin{table}
-  \footnotesize
-  \begin{tabular}{ |c|c|c| }
+ \begin{longtable}{ |c|c|l| }
   \hline
   ID       & Título & Descripción \\ \hline
-  RNF-EDI1 & Ordenación en el listado de edificios 
-  & \makecell[l]{Los edificios se ordenarán por cercanía a la ubicación de la \\
-   persona si se pudiera utilizar. En caso de no estar disponible, \\
-   se ordenará por orden alfabético. 
+  RNF-EDI1 & \makecell{Ordenación en el \\ listado de edificios}
+  & \makecell[l]{Los edificios se ordenarán por cercanía \\
+  a la ubicación de la persona si se pudiera utilizar. \\
+  En caso de no estar disponible, se ordenará por orden \\
+  alfabético. 
   }\\ \hline
 
   RNF-EDI2 & \makecell{
     Filtrado en el listado \\
     de ordenación de edificios}
-  & \makecell[l]{Los edificios se podrán filtrar por nombre, tipo de edificio, \\
-  distancia o si tiene algún rol especial en ese edificio.
+  & \makecell[l]{Los edificios se podrán filtrar por nombre, \\
+  tipo de edificio, distancia o si tiene algún rol especial \\
+  en ese edificio.
   } \\ \hline
 
   RNF-EDI3 & \makecell{Mapa en los \\ detalles de un edificio}
-  & \makecell[l]{En la vista de los detalles, se incluirá un mapa mostrando \\ 
-  la ubicación del edificio. Utilizará el API de Google Maps.
+  & \makecell[l]{En la vista de los detalles, se incluirá  \\
+  un mapa mostrando la ubicación del edificio.\\
+  Utilizará el API de Google Maps.
    } \\ \hline
   % NF: Como lo ordeno, filtros, buscador... Detalles de la vista de detalles del edificio (mapa, salseo...)
 
-  RNF-USU1 & Servicio de Autenticación de Fiware 
-  & \makecell[l]{Se utilizarán los microservicios de autenticación de \\
-  Identity Manager para la autenticación de los usuarios y de \\
-  los dispositivos en el sistema por compatibilidad con Fiware.
+  RNF-USU1 & \makecell{Servicio de \\Autenticación de Fiware}
+  & \makecell[l]{Se utilizarán los microservicios de \\
+  autenticación de Identity Manager para la \\
+  autenticación de los usuarios y de los dispositivos \\
+  en el sistema por compatibilidad con Fiware.
   } \\ \hline
   % Voy a utilizar (no me acuerdo como se llama) La cosa esta de auth de fiware.
   
   RNF-USU2 & Acceso anónimo 
-  & \makecell[l]{Un usuario no registrado podrá entrar en la aplicación \\
-   de forma anónima. Solo podrán visualizar datos públicos de \\
-   los edificios.
+  & \makecell[l]{Un usuario no registrado podrá entrar en \\
+   la aplicación de forma anónima. Solo podrán\\
+   visualizar datos públicos de los edificios.
    } \\ \hline
   % NF: CUALQUIER USUARIO REGISTRADO O NO PODRÁ ACCEDER A LA APLICACIÓN. UN USUARIO NO REGISTRADO ENTRARÁ DE FORMA ANÓNIMA.
   
   RNF-USU3 & Token de sesión 
-  & \makecell[l]{Se utilizará un token de sesión JWT (Json Web Token) \\
-   que expirará cada 24 horas y que la aplicación guardará en \\
-   el session storage.
+  & \makecell[l]{Se utilizará un token de sesión JWT \\
+  (Json Web Token) que expirará cada 24 horas y que la \\
+  aplicación guardará en el session storage.
    } \\ \hline
   % NF: EL TOKEN GENERADO SE GUARDARÁ EN SESSION STGORATE... USARE JSONWEWTOKEN... DURACIÓN DE SESIÓN? 24H? ES PREGUNTA.
   RNF-ROL1 & Maestro roles de la aplicación 
-  & Hay 3 roles en la aplicación: administrador, usuario y anónimo. \\ \hline
+  & \makecell[l]{Hay 3 roles en la aplicación: \\
+  administrador, usuario y anónimo.
+  } \\ \hline
   RNF-ROL2 & Maestro roles de un edificio 
-  & \makecell[l]{Cualquier usuario registrado podrá tener 1 rol de los siguientes \\
-  en cada edificio:  creador, editor, miembro, público
+  & \makecell[l]{Cualquier usuario registrado podrá tener \\
+  1 rol de los siguientes en cada edificio:  creador, editor,\\
+  miembro, público
   } \\ \hline
 
-  RNF-USU4 & Almacenamiento de la constraseña & Se almacenarán las constraseñas de los 
-  usuarios en una base de datos dedicada a las credenciales gestionada por 
-  \end{tabular}
-\end{table}
+  RNF-USU4 & Almacenamiento de la constraseña 
+  & \makecell[l]{Se almacenarán las constraseñas de los \\
+  usuarios en una base de datos dedicada a las \\
+  credenciales gestionada por Identity Manager
+  } \\ \hline 
+\end{longtable}
+}
 \section{Apéndice}
 \subsection{Acrónimos y Abreviaturas}
 \begin{itemize}
