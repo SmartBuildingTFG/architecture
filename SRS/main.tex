@@ -333,6 +333,12 @@ Roles en un edificio:
   (Json Web Token) que expirará cada 24 horas y que la \\
   aplicación guardará en el session storage.
    } \\ \hline
+   
+  RNF-USU4 & Almacenamiento de la constraseña 
+  & \makecell[l]{Se almacenarán las constraseñas de los \\
+  usuarios en una base de datos dedicada a las \\
+  credenciales gestionada por Identity Manager
+  } \\ \hline 
   % NF: EL TOKEN GENERADO SE GUARDARÁ EN SESSION STGORATE... USARE JSONWEWTOKEN... DURACIÓN DE SESIÓN? 24H? ES PREGUNTA.
   RNF-ROL1 & Maestro roles de la aplicación 
   & \makecell[l]{Hay 3 roles en la aplicación: \\
@@ -344,11 +350,56 @@ Roles en un edificio:
   miembro, público
   } \\ \hline
 
-  RNF-USU4 & Almacenamiento de la constraseña 
-  & \makecell[l]{Se almacenarán las constraseñas de los \\
-  usuarios en una base de datos dedicada a las \\
-  credenciales gestionada por Identity Manager
-  } \\ \hline 
+  % Requisitos No funcionales Fiware
+  RNF-FIW1 & Capacidad de recopilación de datos 
+  & \makecell[l]{Debe ser capaz de recopilar datos \\
+  de los sensores y dispositivos ubicados en diferentes áreas \\
+  del edificio y en tiempo real. Además, debe ser capaz de\\
+  manejar grandes volúmenes de datos.
+  } \\ \hline
+  RNF-FIW2 & Integración con sistemas de terceros 
+  & \makecell[l]{Debe ser compatible con sistemas de terceros\\
+  para garantizar la interoperabilidad. Debe poder integrarse\\
+  sin problemas con sistemas existentes en el edificio.
+  } \\ \hline
+  RNF-FIW3 & Análisis de datos
+  & \makecell[l]{Debe ser capaz de analizar los datos\\
+  recopilados de los sensores y dispositivos para proporcionar\\
+  información valiosa.
+  } \\ \hline
+
+  RNF-FIW4 & Control y gestión de dispositivos
+  & \makecell[l]{
+    Debe ser capaz de controlar y gestionar dispositivos\\
+    y sistemas conectados en el edificio, como sistemas de\\
+    iluminación, HVAC, puertas, persianas, entre otros. Esto\\
+    debe ser posible desde una única plataforma central.
+  } \\ \hline
+
+  RNF-FIW5 & Seguridad y privacidad de los datos
+  & \makecell[l]{
+    Los datos sensibles se tratarán de manera especial para aumentar su seguridad.
+    Por ejemplo, cifrar los datos o aplicarle un hash según sea necesario, como 
+    matrículas de coches.
+  } \\ \hline
+
+  RNF-FIW6 & Escalabilidad
+  & \makecell[l]{
+    Debe ser escalable para que pueda manejar el\\
+    crecimiento de edificios inteligentes.\\
+    Debe ser capaz de adaptarse a la creciente cantidad\\
+    de sensores y dispositivos conectados y proporcionar\\
+    una capacidad de procesamiento adecuada para manejar\\
+    los grandes volúmenes de datos.
+  } \\ \hline
+
+  RNF-FIW7 & Integración con tecnologías de vanguardia
+  & \makecell[l]{
+    Debe ser compatible con tecnologías emergentes,\\
+    como inteligencia artificial o el aprendizaje automático,\\
+    para poder ofrecer soluciones de IoT avanzadas.
+  } \\ \hline
+
 \end{longtable}
 }
 \section{Apéndice}
