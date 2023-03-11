@@ -15,6 +15,7 @@
   pdfpagemode=FullScreen,
 }
 \newcommand\ttab{\tab \hspace{-5cm}}
+\newcommand{\tabitem}{~~\llap{\textbullet}~~}
 \graphicspath{{./images/}}
 
 \begin{document}
@@ -243,7 +244,28 @@ Roles en un edificio:
     un edificio. Cuando se rechazen, estos se eliminarán de la \\
     base de datos. 
     } \\ \hline
-  
+  RF-EDI5 & \makecell{Ordenación en el \\ listado de edificios}
+  & \makecell[l]{Los edificios se ordenarán por cercanía \\
+  a la ubicación de la persona si se pudiera utilizar. \\
+  En caso de no estar disponible, se ordenará por orden \\
+  alfabético. 
+  }\\ \hline
+
+  RF-EDI6 & \makecell{
+  Filtrado en el listado \\
+  de ordenación de edificios}
+  & \makecell[l]{Los edificios se podrán filtrar por nombre, \\
+  tipo de edificio, distancia o si tiene algún rol especial \\
+  en ese edificio.
+  } \\ \hline
+
+  RF-EDI7 & \makecell{Mapa en los \\ detalles de un edificio}
+  & \makecell[l]{En la vista de los detalles, se incluirá  \\
+  un mapa mostrando la ubicación del edificio.\\
+  Utilizará el API de Google Maps.
+   } \\ \hline
+  % NF: Como lo ordeno, filtros, buscador... Detalles de la vista de detalles del edificio (mapa, salseo...)
+
   RF-USU1 & RUD de Usuarios 
   & \makecell[l]{Los usuarios logueados podrán visualizar los perfiles \\
   de otras personas, actualizar sus datos o darse de baja. 
@@ -291,27 +313,6 @@ Roles en un edificio:
  \begin{longtable}{ |c|c|l| }
   \hline
   ID       & Título & Descripción \\ \hline
-  RNF-EDI1 & \makecell{Ordenación en el \\ listado de edificios}
-  & \makecell[l]{Los edificios se ordenarán por cercanía \\
-  a la ubicación de la persona si se pudiera utilizar. \\
-  En caso de no estar disponible, se ordenará por orden \\
-  alfabético. 
-  }\\ \hline
-
-  RNF-EDI2 & \makecell{
-    Filtrado en el listado \\
-    de ordenación de edificios}
-  & \makecell[l]{Los edificios se podrán filtrar por nombre, \\
-  tipo de edificio, distancia o si tiene algún rol especial \\
-  en ese edificio.
-  } \\ \hline
-
-  RNF-EDI3 & \makecell{Mapa en los \\ detalles de un edificio}
-  & \makecell[l]{En la vista de los detalles, se incluirá  \\
-  un mapa mostrando la ubicación del edificio.\\
-  Utilizará el API de Google Maps.
-   } \\ \hline
-  % NF: Como lo ordeno, filtros, buscador... Detalles de la vista de detalles del edificio (mapa, salseo...)
 
   RNF-USU1 & \makecell{Servicio de \\Autenticación de Fiware}
   & \makecell[l]{Se utilizarán los microservicios de \\
@@ -403,6 +404,400 @@ Roles en un edificio:
 
 \end{longtable}
 }
+
+\subsection{Casos de uso}
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-01 & Registrarse \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem RF-USU2 Registro en la aplicación \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Cualquier usuario podrá registrarse en la aplicación. \\ \hline
+  Secuencia normal & 
+  \parbox{.7\textwidth}{
+    \begin{enumerate}
+      \item El usuario accede al home
+      \item El usuario selecciona el botón de registrarse para navegar al formulario de registro.
+      \item El usuario rellena el formulario de registro.
+      \item El usuario selecciona el botón de enviar formulario.
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & \parbox{.7\textwidth}{
+    \vspace{.5\baselineskip}
+    El usuario consigue una cuenta con la que podrá acceder a funcionalidades adicionales.
+    \vspace{.5\baselineskip}
+  } \\ \hline
+  Excepciones & 
+  \parbox{.7\textwidth}{
+    \begin{enumerate}
+      \item Las credenciales de autenticación ya existen.
+      \begin{enumerate}
+        \item El sistema notificará al usuario con un mensaje.
+        \item Se cancela el caso de uso.
+      \end{enumerate}
+      \item La contraseña no cumple las políticas de seguridad.
+      \begin{enumerate}
+        \item El sistema notificará al usuario con un mensaje.
+        \item Se cancela el caso de uso.
+      \end{enumerate}
+    \end{enumerate}
+  } \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-02 & Visualizar listado de edificios \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+  \parbox{.7\textwidth}{
+    \begin{itemize}
+      \item RF-EDI5 Ordenación en el listado de edificios
+      \item RF-EDI6 Filtrado en el listado de ordenación de edificios
+    \end{itemize}
+  } \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & 
+  \parbox{.7\textwidth}{
+    \vspace{.5\baselineskip}
+    Cualquier usuario registrado o no podrá visualizar un listado de los edificios.
+    \vspace{.5\baselineskip}
+  } \\ \hline
+  Secuencia normal & 
+  \parbox{.7\textwidth}{
+    \begin{enumerate}
+      \item El usuario accede al home.
+      \item El usuario puede ver el listado de edficios en el home.
+      \item El usuario puede filtrar el listado rellenando un formulario de filtros para buscar el edificio deseado.
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-03 & Validar acceso \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-04 & Acceso al home \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-05 & Cerrar sesión \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-06 & RUD usuario \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-07 & Solicitar creación edificio \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-08 & Crear edificio \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-09 & Aprobar solicitud \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-10 & Denegar solicitud \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-11 & D edficio \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-12 & Otorgar rol edificio \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-13 & CUD dispositivos \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-14 & U Edificio \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-15 & R Edificio \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-16 & R dispositivos \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-17 & R edificio privado \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
+\begin{longtable}{ |l|l| }
+  \hline
+  CU-18 & R Edificio público \\ \hline
+  Versión & 1.0 \\ \hline
+  Dependencias & 
+    \tabitem Ninguna \\ \hline
+  Precondición & Ninguna \\ \hline
+  Descripción & Ninguna \\ \hline
+  Secuencia normal & 
+  \parbox{.45\textwidth}{
+    \begin{enumerate}
+      \item Test
+      \item Second
+    \end{enumerate}
+  } \\ \hline
+  Postcondición & Ninguna \\ \hline
+  Excepciones & Ninguna \\ \hline
+  Comentarios & Ninguno \\ \hline
+\end{longtable}
+
 \section{Apéndice}
 \subsection{Acrónimos y Abreviaturas}
 \begin{itemize}
